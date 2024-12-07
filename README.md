@@ -19,7 +19,7 @@ docker compose up -d
 
 http://localhost:15672 login: guest / pwd: guest
 
-### 4. Augmenter le travail en augmenter le nombre de producteur
+### 4. Augmenter le travail en augmentant le nombre de producteur
 
 ```
 docker compose scale producer=5
