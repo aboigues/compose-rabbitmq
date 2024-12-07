@@ -1,0 +1,29 @@
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672" # Port pour les communications avec les clients (AMQP)
+      - "15672:15672" # Port pour l'interface web RabbitMQ
+    healthcheck:
+     test: rabbitmq-diagnostics -q ping
+     interval: 30s
+     timeout: 30s
+     retries: 5
+     start_period: 10s
+  producer:
+   build: ./producer
+     #container_name: producer
+   depends_on:
+    rabbitmq:
+     condition: service_healthy
+   volumes:
+     - ./producer/messages.txt:/app/messages.txt
+  consumer:
+    build: ./consumer
+      #container_name: consumer
+    depends_on:
+      rabbitmq:
+       condition: service_healthy
+
+
