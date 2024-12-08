@@ -16,7 +16,7 @@ services:
      #container_name: producer
    depends_on:
     rabbitmq:
-     condition: service_healthy
+      condition: service_healthy
    volumes:
      - ./producer/messages.txt:/app/messages.txt
   consumer:
@@ -24,6 +24,6 @@ services:
       #container_name: consumer
     depends_on:
       rabbitmq:
-       condition: service_healthy
+        condition: service_healthy
 
 
